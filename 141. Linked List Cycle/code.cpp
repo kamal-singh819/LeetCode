@@ -6,6 +6,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+//METHOD - I    USING SLOW-FAST POINTER APPROACH...
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
@@ -30,5 +32,26 @@ public:
         }
         return true;
         
+    }
+};
+
+
+//METHOD - II    USING UNORDERED_SET
+
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_set<ListNode*> st;
+        while(head != NULL){
+            if(st.count(head) < 1)
+                st.insert(head);
+            else if(st.count(head) == 1){
+                return true;
+            }      
+            else if(head == NULL)
+                return false;      
+            head = head->next;        
+        }
+        return false;      
     }
 };
