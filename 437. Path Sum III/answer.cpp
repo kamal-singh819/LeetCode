@@ -10,29 +10,32 @@
  * };
  */
 
-//CALL THE DFS FOR EVERY NODE-----------------
+
+//WE WILL CALL DFS FOR EVERY NODE...............
 class Solution {
 public:
     int ans = 0;
     
-    void dfs(TreeNode* root, long long targetSum){
+    void dfs(TreeNode* root, long long targetSum, long long route){
         if(root == NULL)
             return;
-
-        if(root->val == targetSum)
+        
+        route += root->val;
+        if(route == targetSum)
             ans++;
 
         if(root->left)
-            dfs(root->left, targetSum-root->val);
+            dfs(root->left, targetSum, route);
         if(root->right)    
-            dfs(root->right, targetSum-root->val);        
+            dfs(root->right, targetSum, route);        
 
     }
     int answer(TreeNode* root, long long targetSum){
         if(root == NULL)
             return 0;
-
-        dfs(root, targetSum); //we will dfs for every Node---------
+        
+        long long route = 0;
+        dfs(root, targetSum, route); //we will dfs for every Node---------
         if(root->left)
             answer(root->left, targetSum);
         if(root->right)    
