@@ -1,4 +1,4 @@
-////////////////////////   USING MAX HEAP   ////////////////
+////////////////////////   USING MAX HEAP  (O(nlogK))   ////////////////
 
 class Solution {
 public:
@@ -28,3 +28,32 @@ public:
         
     }
 };
+
+
+
+////////////////  USING TWO POINTER APPROACH (O(n))  ////////////////////
+
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        vector<int> ans; 
+        int n = arr.size();
+        
+        int left = 0;
+        int right = n-1;
+
+        while(right-left >= k){
+            if(x-arr[left] > arr[right]-x)
+                left++;
+            
+            else
+                right--;
+        }
+        
+        for(int i=left; i<= right; i++){
+            ans.push_back(arr[i]);
+        }
+        return ans;
+    }
+};
+
