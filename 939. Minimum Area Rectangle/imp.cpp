@@ -14,7 +14,7 @@ public:
                     int x = points[i][0];
                     int y = points[j][0];
                     for(auto it : hash[x]){
-                        if(it != points[i][1] && hash[y].find(it) != hash[j].end()){
+                        if(it != points[i][1] && hash[y].find(it) != hash[y].end()){
                             int area = abs(it-points[i][1]) * abs(points[i][0]-points[j][0]);
                             ans = min(ans, area);
                         }
