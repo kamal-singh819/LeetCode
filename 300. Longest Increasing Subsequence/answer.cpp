@@ -18,7 +18,7 @@ public:
                 temp[ind] = nums[i];
             }
         }
-        return temp.size();
+        return len;
     }
 };
 
