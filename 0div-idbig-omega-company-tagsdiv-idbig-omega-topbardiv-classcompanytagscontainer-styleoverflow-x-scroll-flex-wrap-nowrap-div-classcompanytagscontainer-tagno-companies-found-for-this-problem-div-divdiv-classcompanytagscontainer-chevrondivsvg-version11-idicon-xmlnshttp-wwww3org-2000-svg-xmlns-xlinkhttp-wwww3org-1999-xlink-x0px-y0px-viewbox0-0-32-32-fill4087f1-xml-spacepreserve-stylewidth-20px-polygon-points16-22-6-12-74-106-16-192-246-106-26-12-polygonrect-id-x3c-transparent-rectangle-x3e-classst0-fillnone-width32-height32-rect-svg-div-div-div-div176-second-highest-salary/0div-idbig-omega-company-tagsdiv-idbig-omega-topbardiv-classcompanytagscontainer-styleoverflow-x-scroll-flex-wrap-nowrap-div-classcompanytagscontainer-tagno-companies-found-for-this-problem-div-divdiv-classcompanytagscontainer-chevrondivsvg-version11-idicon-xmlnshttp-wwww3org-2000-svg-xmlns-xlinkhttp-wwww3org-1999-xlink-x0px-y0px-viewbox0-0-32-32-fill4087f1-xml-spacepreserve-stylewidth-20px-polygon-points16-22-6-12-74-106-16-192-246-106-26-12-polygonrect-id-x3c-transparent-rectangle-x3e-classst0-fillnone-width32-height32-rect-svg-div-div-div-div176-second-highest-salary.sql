@@ -12,14 +12,26 @@
 #         end as SecondHighestSalary
 #     from Employee;
     
-## LIMIT method
-select 
+## using max() aggrigate 
+# select 
+#     case
+#         when count(distinct salary) < 2 then null
+#         else (
+#             select max(salary) from Employee where salary < (
+#                 select max(salary) from Employee
+#             )
+#         )
+#     end as SecondHighestSalary
+# from Employee;
+
+## using limit
+select
     case
         when count(distinct salary) < 2 then null
         else (
-            select max(salary) from Employee where salary < (
+            select salary from Employee where salary < (
                 select max(salary) from Employee
-            )
+            ) order by salary desc limit 1
         )
     end as SecondHighestSalary
 from Employee;
