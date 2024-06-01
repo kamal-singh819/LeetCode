@@ -12,7 +12,7 @@
 #         end as SecondHighestSalary
 #     from Employee;
     
-## using max() aggrigate 
+## using max() aggrigate [to find 3rd highest, add one more sub query and so on....]
 # select 
 #     case
 #         when count(distinct salary) < 2 then null
@@ -37,13 +37,23 @@
 # from Employee;
 
 ## using NOT IN or <> operator
-select 
+# select 
+#     case
+#         when count(distinct salary) < 2 then null
+#         else (
+#             select max(salary) from Employee where salary NOT IN (
+#                 select max(salary) from Employee
+#             )
+#         )
+#     end as SecondHighestSalary
+# from Employee;
+
+## using limit clause
+select
     case
         when count(distinct salary) < 2 then null
         else (
-            select max(salary) from Employee where salary NOT IN (
-                select max(salary) from Employee
-            )
+            select distinct salary from Employee order by salary desc limit 1,1
         )
     end as SecondHighestSalary
 from Employee;
