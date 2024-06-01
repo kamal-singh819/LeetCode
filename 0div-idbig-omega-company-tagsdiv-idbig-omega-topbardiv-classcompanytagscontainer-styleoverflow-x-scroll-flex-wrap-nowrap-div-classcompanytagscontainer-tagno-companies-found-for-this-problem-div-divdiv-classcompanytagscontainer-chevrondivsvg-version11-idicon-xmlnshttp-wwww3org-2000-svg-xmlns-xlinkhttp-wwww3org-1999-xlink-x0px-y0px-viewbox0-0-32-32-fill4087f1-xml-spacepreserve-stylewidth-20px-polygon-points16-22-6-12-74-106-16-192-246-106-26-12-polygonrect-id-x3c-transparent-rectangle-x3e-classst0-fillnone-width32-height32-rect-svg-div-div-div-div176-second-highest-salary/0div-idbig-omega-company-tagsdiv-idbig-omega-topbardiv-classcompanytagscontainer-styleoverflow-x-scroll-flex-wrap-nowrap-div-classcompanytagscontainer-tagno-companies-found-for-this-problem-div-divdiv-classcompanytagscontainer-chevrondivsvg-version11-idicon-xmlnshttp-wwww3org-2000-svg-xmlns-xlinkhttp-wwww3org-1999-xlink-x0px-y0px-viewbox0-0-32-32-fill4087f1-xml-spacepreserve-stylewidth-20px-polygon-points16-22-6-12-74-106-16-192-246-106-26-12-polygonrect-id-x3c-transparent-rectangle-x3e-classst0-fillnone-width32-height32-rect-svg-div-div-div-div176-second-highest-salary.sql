@@ -25,13 +25,25 @@
 # from Employee;
 
 ## using limit
-select
+# select
+#     case
+#         when count(distinct salary) < 2 then null
+#         else (
+#             select salary from Employee where salary < (
+#                 select max(salary) from Employee
+#             ) order by salary desc limit 1
+#         )
+#     end as SecondHighestSalary
+# from Employee;
+
+## using NOT IN or <> operator
+select 
     case
         when count(distinct salary) < 2 then null
         else (
-            select salary from Employee where salary < (
+            select max(salary) from Employee where salary NOT IN (
                 select max(salary) from Employee
-            ) order by salary desc limit 1
+            )
         )
     end as SecondHighestSalary
 from Employee;
